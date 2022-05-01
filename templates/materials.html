@@ -1,0 +1,20 @@
+{% load my_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+<div>
+    <a href="{% url 'logout' %}">Logout</a>
+</div>
+<div>
+    <a href="{% url 'create_material' %}">Add new material</a>
+</div>
+<ul>
+{% for material in materials %}
+    <li>{{ material|mongo_id }} {{ material.name }} {{ material.uom_fk }} {{ material.price }} {{ material.tax_rate }} <a href="{% url 'update_material' material|mongo_id %}">Edit</a> <a href="{% url 'delete_material' material|mongo_id %}">Delete</a></li>
+{% endfor %}
+</ul>
+</body></html>

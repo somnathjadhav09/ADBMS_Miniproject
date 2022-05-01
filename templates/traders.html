@@ -1,0 +1,20 @@
+{% load my_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+<div>
+    <a href="{% url 'logout' %}">Logout</a>
+</div>
+<div>
+    <a href="{% url 'create_trader' %}">Add new trader</a>
+</div>
+<ul>
+{% for trader in traders %}
+    <li>{{ trader|mongo_id }} {{ trader.is_merchant }} {{ trader.fname }} {{ trader.lname }} {{ trader.email }} {{ trader.phone }} <a href="{% url 'update_trader' trader|mongo_id %}">Edit</a> <a href="{% url 'delete_trader' trader|mongo_id %}">Delete</a></li>
+{% endfor %}
+</ul>
+</body></html>

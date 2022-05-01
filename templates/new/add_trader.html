@@ -1,0 +1,89 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing system</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="{% static 'css/styles1.css' %}">
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <nav>
+            <div class="container">
+                <div class="text-center">
+                    <a href="/" class="nav-brand text-dark">Billing System</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- header -->
+
+    <!-- main site -->
+    <main id="site-main">
+        <div class="container">
+            <div class="box-nav d-flex-justify-between">
+               <div class="filter">
+                   <a href="{% url 'list_traders' %}"><i class="fas fa-angle-double-left"></i>All Traders</a>
+               </div>
+            </div>
+
+            <div class="form-title text-center">
+                <h2 class="text-dark">New Trader</h2>
+                <span class="text-light">Fill in the details to add a new trader</span>
+            </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <b>{{ message }}</b>
+                    <br>
+                    <br>
+                {% endfor %}
+            {% endif %}
+            <!-- form handling -->
+            <form  action="{% url 'create_trader' %}" method="POST" id="update_user">
+                {% csrf_token %}
+               <div class="new_user">
+                   <div class="form-group">
+                    <label for="name" class="text-light">Trader Type</label>
+                       <label class="bcontainer">Merchant
+                            <input type="radio" name="is_merchant" value="True">
+                            <span class="checkmark"></span>
+                       </label>
+                       <label class="bcontainer">Customer
+                            <input type="radio" name="is_merchant" value="False">
+                            <span class="checkmark"></span>
+                       </label>
+                   </div>
+                   <div class="form-group2">
+                    <label for="first-name" class="text-light">First Name</label><br>
+                   <input type="text" name="fname" id="first-name" placeholder="Enter first name">
+                </div>
+                <div class="form-group2">
+                    <label for="last-name" class="text-light">Last Name</label><br>
+                   <input type="text" name="lname" id="first-name" placeholder="Enter last name">
+                </div>
+                   <div class="form-group">
+                        <label for="Email" class="text-light">Email ID</label>
+                        <input type="text" name="email" id="" placeholder="example@gmail.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="uom" class="text-light">Phone Number</label>
+                        <input type="text" name="phone" id="" placeholder="123456789">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn text-dark update">Save</button>
+                    </div>
+               </div>
+
+            </form>
+
+        </div>
+    </main>
+    <!-- main site -->
+</body>
+</html>
+ 

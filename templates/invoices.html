@@ -1,0 +1,30 @@
+{% load my_filters %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoices</title>
+</head>
+<body>
+<div>
+    <a href="{% url 'logout' %}">Logout</a>
+</div>
+<div>
+    <a href="{% url 'create_invoice' %}">Add new invoice</a>
+</div>
+<ul>
+{% for invoice in invoices %}
+    <li>{<br>"Object ID": {{ invoice|mongo_id }},<br>"is_sale": {{ invoice.is_sale }},<br>"date_time": {{ invoice.date_time }},<br>"trader_fk": {{ invoice.customer_fk }} <a href="{% url 'update_invoice' invoice|mongo_id %}">Edit</a> <a href="{% url 'delete_invoice' invoice|mongo_id %}">Delete</a></li>
+    <ul>
+    "materials": {
+        {% for material in invoice.materials %}
+            <li><br>"material_fk": {{ material.material_fk }},<br>"quantity": {{ material.quantity }},<br>"price": {{ material.price }},<br>"tax_rate": {{ material.tax_rate }},<br>"amount": {{ material.amount }}</li>
+        {% endfor %}
+    }
+    </ul>
+    }
+{% endfor %}
+</ul>
+</body>
+</html>

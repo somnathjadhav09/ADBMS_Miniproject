@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing system</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="css/invoice.css">
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <nav>
+            <div class="container">
+                <div class="text-center">
+                    <a href="/" class="nav-brand text-dark">Billing System</a>
+                </div>
+            </div>
+        </nav>
+        <div class="navbar">
+            <a href="{% url 'list_materials' %}">Materials</a>
+            <a href="{% url 'list_invoices' %}">Invoices</a>
+            <a href="{% url 'list_uoms' %}">UOM</a>
+            <a href="{% url 'list_traders' %}">Traders</a>
+            <div class="login">
+                <a href="signin.html">Sign In</a>
+            </div>
+        </div>
+          
+    </header>
+    <!-- header -->
+    <br>
+    
+    <!-- main site -->
+    <div class="container">
+        <div class="combine">
+            <div class="title">Invoice</div>
+                <div class="combine pd">
+
+                       <label class="bcontainer" class="text-light">Purchase
+                            <input type="radio" name="radio">
+                            <span class="checkmark"></span>
+                       </label>
+                </div>
+                <div class="combine pd">
+                       <label class="bcontainer" class="text-light">Sale
+                            <input type="radio" name="radio">
+                            <span class="checkmark"></span>
+                       </label>
+                   </div>
+        </div>
+        <div class="content">
+            <div class="middle">
+                <h2>Customer Details</h2>
+            </div>
+            <div class="inner-content">
+               <form  method="post" id="update_user">
+                   <div class="new_user">
+                      
+                        <div class="form-group2">
+                            <label for="product" class="text-light">First Name</label><br>
+                           <input type="text" name="name" id="quantity" placeholder="Enter customer's first name">
+                        </div>
+                        <div class="form-group2">
+                            <label for="quantity" class="text-light">Last Name</label><br>
+                           <input type="number" name="name" id="quantity" placeholder="Enter customer's last name">
+                        </div>
+                        <div class="form-group2">
+                            <label for="quantity" class="text-light">Phone number </label><br>
+                           <input type="number" name="name" id="quantity" placeholder="Enter quantity">
+                        </div>
+                        <div class="form-group2">
+                            <label for="date" class=text-light>Date</label><br>
+                            <input type="date" name="date">
+                        </div>
+                   </div>
+                </form>
+            </div>  
+            <br>
+        </div>
+    <main id="site-main">
+           <div class="middle">
+                <h2>Order Details</h2>
+           </div>
+            <!-- form handling -->
+            <form action="" method="post">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Sr No</th>
+                            <th>Product name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Tax(%)</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="additems">
+                        <tr>
+                            <td>1</td>
+                            <td> 
+                                    <div class="productname">
+                                     <input type="text" placeholder="" required>
+                                    </div> 
+                            </td>
+                            <td> <div class="price">
+                                     <input type="text" placeholder="" required>
+                                    </div>
+                            </td>
+                            <td> <div class="qty">
+                                     <input type="text" placeholder="" required>
+                                    </div>
+                            </td>
+                            <td> <div class="tax">
+                                     <input type="text" placeholder="" required>
+                                    </div>
+                            </td>
+                            <td> <div class="amount">
+                                     <input type="text" placeholder="" required >
+                                    </div> 
+                            </td>
+                        </tr>;
+                    </tbody>
+                </table>
+                <div class="box-nav d-flex-justify-between">
+                    <a href="" class="border-shadow" onclick="additems()">
+                        <span class="text-gradient">Add Product  <i class="fas fa-user"></i></span>
+                    </a>
+                </div>
+            </form>
+
+        </div>
+    </main>
+    
+     <script>
+         document.getElementsByClassName("border-shadow").onclick=additems;
+         function additems()
+         {
+                var counter;
+                if( typeof additems.counter == 'undefined' )
+                {
+                     additems.counter = 1;
+                }
+                additems.counter++;
+                console.log(counter);
+                // document.getElementById("additems").innerHTML =
+                       
+                        
+         }
+     </script>
+    <!-- main site -->
+</body>
+</html>
+<!--  
+document.getElementsByClassName("border-shadow").onclick = additems;
+        
+        
+
+<tr>\
+    <td>counter</td>\
+    <td> \
+            <div class="productname">\
+             <input type="text" placeholder="" required>
+            </div> 
+    </td>\
+    <td> <div class="price">\
+             <input type="text" placeholder="" required>
+            </div>
+    </td>\
+    <td> <div class="qty">\
+             <input type="text" placeholder="" required>\
+            </div>\
+    </td>\
+    <td> <div class="tax">\
+             <input type="text" placeholder="" required>\
+            </div>\
+    </td>\
+    <td> <div class="amount">\
+             <input type="text" placeholder="" required>\
+            </div> \
+    </td>\
+</tr>; -->

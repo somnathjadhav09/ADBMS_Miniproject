@@ -1,0 +1,97 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing system</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <nav>
+            <div class="container">
+                <div class="text-center">
+                    <a href="index.html" class="nav-brand text-dark">Billing System</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- header -->
+
+    <!-- main site -->
+    <main id="site-main">
+        <div class="container">
+            <div class="box-nav d-flex-justify-between">
+               <div class="filter">
+                   <a href="{% url 'list_materials' %}"><i class="fas fa-angle-double-left"></i>  All Products</a>
+               </div>
+            </div>
+
+            <div class="form-title text-center">
+                <h2 class="text-dark">New Product</h2>
+                <span class="text-light">Use the below form to add new product</span>
+            </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <b>{{ message }}</b>
+                    <br>
+                    <br>
+                {% endfor %}
+            {% endif %}
+            <!-- form handling -->
+            <form  action="{% url 'create_material' %}" method="POST" id="update_user">
+                {% csrf_token %}
+               <div class="new_user">
+
+                <div class="form-group2">
+                    <label for="product" class="text-light">Product</label><br>
+                <input type="text" name="name" id="product" value="{{ material.name }}" placeholder="Enter product name">
+                </div>
+                <div class="form-group2">
+                    <label for="quantity" class="text-light">Quantity</label><br>
+                <input type="number" name="quantity" id="quantity" placeholder="Enter quantity">
+                </div>
+                <div class="form-group">
+                    <label for="discription" class="text-light">Description</label>
+                    <input type="text" name="description" id="" value="{{ material.description }}" placeholder="enter product description">
+                </div>
+                <div class="form-group">
+                <label for="uom" class="text-light">UOM</label>
+                    <input list="uom" name="uom_fk" placeholder="select unit of measure">
+                    <datalist id="uom">
+                        {% for key, values in uoms.items %}
+                            {% if key == material.uom_fk %}
+                                <option value="{{ key }}" selected>{{ values }}</option>
+                            {% else %}
+                                <option value="{{ key }}">{{ values }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </datalist>
+                </div>
+                <div class="form-group2">
+                    <label for="price" class="text-light">Price</label><br>
+                    <input type="number" name="price" value="{{ material.price }}" id="quantity" placeholder="Enter price">
+                </div>
+                <div class="form-group2">
+                    <label for="tax_rate" class="text-light">Tax Rate</label><br>
+                <input type="number" name="tax_rate" id="quantity" value="{{ material.tax_rate }}" placeholder="Enter tax rate in %">
+                </div>
+                <div class="form-group">
+                        <button type="submit" class="btn text-dark update">Update</button>
+                </div>
+                    
+               </div>
+
+            </form>
+
+        </div>
+    </main>
+    <!-- main site -->
+</body>
+</html>
+ 

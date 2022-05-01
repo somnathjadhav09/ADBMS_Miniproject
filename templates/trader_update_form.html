@@ -1,0 +1,37 @@
+{% load my_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+<div>
+    <a href="{% url 'logout' %}">Logout</a>
+</div>
+<div>
+    {% if messages %}
+        {% for message in messages %}
+            <b>{{ message }}</b>
+            <br>
+            <br>
+        {% endfor %}
+    {% endif %}
+</div>
+<form action="{% url 'update_trader' result|mongo_id %}" method="POST">
+    {% csrf_token %}
+    <label for="fname">First name:</label>
+    <input type="text" id="fname" name="fname" value="{{ result.fname }}"><br><br>
+    <label for="lname">Last name:</label>
+    <input type="text" id="lname" name="lname" value="{{ result.lname }}"><br><br>
+    <label for="email">Email Address:</label>
+    <input type="email" id="email" name="email" value="{{ result.email }}"><br><br>
+    <label for="phone">Phone number:</label>
+    <input type="number" id="phone" name="phone" value="{{ result.phone }}"><br><br>
+    <button type="submit">Create</button>
+    <a href="{% url 'list_traders' %}">
+        <button type="button">Cancel</button>
+    </a>
+</form>
+</body>
+</html>

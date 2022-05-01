@@ -1,0 +1,96 @@
+{% load my_filters %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing system</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <nav>
+            <div class="container">
+                <div class="text-center">
+                    <a href="/" class="nav-brand text-dark">Billing System</a>
+                </div>
+            </div>
+        </nav>
+        <div class="navbar">
+            <a href="{% url 'list_materials' %}">Materials</a>
+            <a href="{% url 'list_invoices' %}">Invoices</a>
+            <a href="{% url 'list_uoms' %}">UOM</a>
+            <a href="{% url 'list_traders' %}">Traders</a>
+            <div class="login">
+                <a href="{% url 'logout' %}">Logout</a>
+            </div>
+        </div>
+    </header>
+    <!-- header -->
+
+    <!-- main site -->
+    <main id="site-main">
+        <div class="container">
+            <div class="box-nav d-flex-justify-between">
+                <a href="{% url 'create_material' %}" class="border-shadow">
+                    <span class="text-gradient"><i class="fas fa-plus"></i> New Product </span>
+                </a>
+            </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <b>{{ message }}</b>
+                    <br>
+                    <br>
+                {% endfor %}
+            {% endif %}
+            <!-- form handling -->
+            <form action="" method="post">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Sr. No.</th>
+                            <th>Name</th>
+                            <th>UOM</th>
+                            <th>Price</th>
+                            <th>Tax Rate</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for material in materials %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ material.name }}</td>
+                            <td>{{ material.uom_fk }}</td>
+                            <td>{{ material.price }}</td>
+                            <td>{{ material.tax_rate }}%</td>
+                            <td>
+                                <a href="{% url 'update_material' material|mongo_id %}" class="btn border-shadow edit">
+                                    <span class="text-gradient"><i class="far fa-pencil-alt"></i></span>
+                                </a>
+                                <a href="{% url 'delete_material' material|mongo_id %}" class="btn border-shadow delete" onclick="myfunction()">
+                                    <span class="text-gradient"><i class="far fa-trash-alt"></i></span>
+                                </a>     
+                           </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </main>
+    <!-- main site -->
+    <script>    
+        // When the user clicks anywhere outside of the modal, close it
+        function myfunction(){
+            window.alert("Are you sure you want to delete this product?");
+        }
+    </script>
+</body>
+</html>
+ 

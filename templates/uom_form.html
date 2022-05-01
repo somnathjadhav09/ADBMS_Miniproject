@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+<div>
+    <a href="{% url 'logout' %}">Logout</a>
+</div>
+<div>
+    {% if messages %}
+        {% for message in messages %}
+            <b>{{ message }}</b>
+            <br>
+            <br>
+        {% endfor %}
+    {% endif %}
+</div>
+<div>
+</div>
+<form action="{% url 'create_uom' %}" method="POST">
+    {% csrf_token %}
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title"><br><br>
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description"><br><br>
+    <button type="submit">Create</button>
+    <a href="{% url 'list_uoms' %}">
+        <button type="button">Cancel</button>
+    </a>
+</form>
+</body>
+</html>
